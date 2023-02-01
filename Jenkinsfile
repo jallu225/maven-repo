@@ -38,6 +38,13 @@ pipeline {
                 }    
             }
         }
+        stage('Quality gate Status'){
+            steps {
+                script{
+                    waitForQualityGate abortPipeline: false, credentialsId: 'sonar-token'
+                }
+            }
+        }
         stage('artifacts upload'){
             steps{
                 script{
