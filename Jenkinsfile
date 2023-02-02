@@ -15,5 +15,8 @@ node {
         withSonarQubeEnv(credentialsId: 'sonar') { 
             bat "mvn clean package sonar:sonar"
          }
-    }  
+    }
+    stage('Qulaity Gate Status'){
+        waitForQualityGate abortPipeline: false, credentialsId: 'sonar'
+    }
 }
